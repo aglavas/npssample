@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Survey;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -25,6 +26,8 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        return view('admin.dashboard', compact('user'));
+        $surveys = Survey::with('shop')->get();
+
+        return view('admin.dashboard', compact(['user', 'surveys']));
     }
 }
