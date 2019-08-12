@@ -7,7 +7,13 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Entities\Survey::class, function (Faker $faker) {
 
-    $locale = $faker->locale;
+    $locale = $faker->unique()->locale;
+
+    factory(\App\Entities\Language::class)->create(
+        [
+            'locale' => $locale
+        ]
+    );
 
     return [
         'shop_id' => factory(\App\Entities\Shop::class)->create(['lang' => $locale])->id,

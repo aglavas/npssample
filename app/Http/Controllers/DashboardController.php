@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\SurveyContact;
 use App\Entities\Survey;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -20,14 +22,18 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @param Survey $survey
+     * @param SurveyContact $surveyContact
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request, Survey $survey, SurveyContact $surveyContact)
     {
         $user = Auth::user();
 
-        $surveys = Survey::with('shop')->get();
+        $surveys = $surveyContact->getAllSurveys($survey, $request);
 
-        return view('admin.dashboard', compact(['user', 'surveys']));
+        $surveyStatistic = $surveyContact->getSurveysOverview($survey);
+
+        return view('admin.dashboard', compact(['user', 'surveys', 'surveyStatistic']));
     }
 }

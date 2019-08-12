@@ -25,7 +25,8 @@
 		{
 			$route = trim($page['route']);
 
-			$is_active_class = $route == $tab ? 'm-menu__item--active' : '';
+//			$is_active_class = $route == $tab ? 'm-menu__item--active' : '';
+			$is_active_class = '';
 			$target = $page['target'] ?? '';
 
 			?>
@@ -87,7 +88,8 @@
                         {
                             $route = trim($item['route']);
                             $title = __(trim($item['title']));
-                            $is_active_class = $route == $tab ? 'm-menu__item--active' : '';
+//                            $is_active_class = $route == $tab ? 'm-menu__item--active' : '';
+                            $is_active_class = '';
                             $target = $item['target'] ?? '';
                             ?>
                             @can($item['permission'])

@@ -19,7 +19,8 @@
 		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/js/bootstrap-material-datetimepicker.js"></script>
 	</head>
 	{{--<body id="mainBody" onload="mainInit();" onbeforeunload="blockPage();" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">--}}
-	<body id="mainBody" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+	{{--<body id="mainBody" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">--}}
+	<body id="mainBody" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 			<header id="m_header" class="m-grid__item m-header" m-minimize-offset="200" m-minimize-mobile-offset="200">
 				<div class="m-container m-container--fluid m-container--full-height">
@@ -33,7 +34,7 @@
 								</div>
 								<div class="m-stack__item m-stack__item--middle m-brand__tools">
 									<!-- BEGIN: Left Aside Minimize Toggle -->
-									<a href="#" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block
+									<a href="#" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block hide
 					 ">
 										<span></span>
 									</a>
@@ -52,66 +53,150 @@
 							</div>
 						</div>
 
+                        <nav class="navbar navbar-default navbar-fixed-top">
+                            <div class="container">
+                                {{ Breadcrumbs::render('dashboard') }}
+                            </div>
+                        </nav>
+
+                        {{--<div class="row">--}}
+                            {{--<div class="col-lg-6">--}}
+                                {{--{{ Breadcrumbs::render('dashboard') }}--}}
+                            {{--</div>--}}
+                            {{--<div class="col-lg-6">--}}
+                                {{--<div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
+                                    {{--<ul class="navbar-nav mr-auto">--}}
+                                        {{--<li class="nav-item dropdown">--}}
+                                            {{--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                                                {{--Dropdown--}}
+                                            {{--</a>--}}
+                                            {{--<div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+                                                {{--<a class="dropdown-item" href="#">Action</a>--}}
+                                                {{--<a class="dropdown-item" href="#">Another action</a>--}}
+                                                {{--<div class="dropdown-divider"></div>--}}
+                                                {{--<a class="dropdown-item" href="#">Something else here</a>--}}
+                                            {{--</div>--}}
+                                        {{--</li>--}}
+                                    {{--</ul>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
 						<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
 							<div id="m_header_topbar" class="m-topbar m-stack m-stack--ver m-stack--general m-stack--fluid">
-								<div class="m-stack__item m-topbar__nav-wrapper">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{--<ul class="nav navbar-nav">--}}
+                                            {{--<li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown active">--}}
+                                                {{--<a href="javascript:;"> Layouts--}}
+                                                    {{--<span class="arrow"></span>--}}
+                                                {{--</a>--}}
+                                                {{--<ul class="dropdown-menu pull-left">--}}
+                                                    {{--<li aria-haspopup="true" class=" ">--}}
+                                                        {{--<a href="layout_mega_menu_light.html" class="nav-link  "> Light Mega Menu </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li aria-haspopup="true" class=" active">--}}
+                                                        {{--<a href="layout_top_bar_light.html" class="nav-link  active"> Light Top Bar Dropdowns </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li aria-haspopup="true" class=" ">--}}
+                                                        {{--<a href="layout_fluid_page.html" class="nav-link  "> Fluid Page </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li aria-haspopup="true" class=" ">--}}
+                                                        {{--<a href="layout_top_bar_fixed.html" class="nav-link  "> Fixed Top Bar </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li aria-haspopup="true" class=" ">--}}
+                                                        {{--<a href="layout_mega_menu_fixed.html" class="nav-link  "> Fixed Mega Menu </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li aria-haspopup="true" class=" ">--}}
+                                                        {{--<a href="layout_disabled_menu.html" class="nav-link  "> Disabled Menu Links </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li aria-haspopup="true" class=" ">--}}
+                                                        {{--<a href="layout_blank_page.html" class="nav-link  "> Blank Page </a>--}}
+                                                    {{--</li>--}}
+                                                {{--</ul>--}}
+                                            {{--</li>--}}
+                                        {{--</ul>--}}
+                                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                                <ul class="navbar-nav mr-auto">
+                                                    <li class="nav-item dropdown">
+                                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdowns" role="button" data-toggle="dropdown" data-target=".navbar-collapse" aria-haspopup="true">
+                                                            Dropdown
+                                                        </a>
+                                                        <nav class="collapse navbar-collapse" role="navigation">
+                                                            <div class="dropdown-menu navbar-collapse" aria-labelledby="navbarDropdown">
+                                                                <a class="dropdown-item" href="/">All</a>
+                                                                @foreach (App\Services\LanguageConfig::get() as $language)
+                                                                    <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
+                                                                @endforeach
+                                                            </div>
+                                                        </nav>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="m-stack__item m-topbar__nav-wrapper">
 
-									<ul class="m-topbar__nav m-nav m-nav--inline">
+                                            <ul class="m-topbar__nav m-nav m-nav--inline">
 
-										<li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
-											<a href="#" class="m-nav__link m-dropdown__toggle">
+                                                <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
+                                                    <a href="#" class="m-nav__link m-dropdown__toggle">
 												<span class="m-topbar__userpic">
 													@include('layouts.profile_area')
 												</span>
-												<span class="m-topbar__username m--hide">{{ Auth::user()->name }}</span>
-											</a>
-											<div class="m-dropdown__wrapper">
-												<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-												<div class="m-dropdown__inner">
-													<div class="m-dropdown__header m--align-center" style="background: url('{{ asset('img/misc/user_profile_bg.jpg') }}'); background-size: cover;">
-														<div class="m-card-user m-card-user--skin-dark">
-															<div class="m-card-user__pic">
-																@include('layouts.profile_area')
-															</div>
-															<div class="m-card-user__details">
-																<span class="m-card-user__name m--font-weight-500">{{ Auth::user()->name }}</span>
-																<a href="mailto:{{ Auth::user()->email }}" class="m-card-user__email m--font-weight-300 m-link">{{ Auth::user()->email }}</a>
-															</div>
-														</div>
-													</div>
-													<div class="m-dropdown__body">
-														<div class="m-dropdown__content">
-															<ul class="m-nav m-nav--skin-light">
-																<li class="m-nav__item">
-																	{{--<a href="{{ $user->profile() }}" class="m-nav__link">--}}
-																	<a href="" class="m-nav__link">
-																		<i class="m-nav__link-icon fa fa-user-edit"></i>
-																		<span class="m-nav__link-title">
+                                                        <span class="m-topbar__username m--hide">{{ Auth::user()->name }}</span>
+                                                    </a>
+                                                    <div class="m-dropdown__wrapper">
+                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                        <div class="m-dropdown__inner">
+                                                            <div class="m-dropdown__header m--align-center" style="background: url('{{ asset('img/misc/user_profile_bg.jpg') }}'); background-size: cover;">
+                                                                <div class="m-card-user m-card-user--skin-dark">
+                                                                    <div class="m-card-user__pic">
+                                                                        @include('layouts.profile_area')
+                                                                    </div>
+                                                                    <div class="m-card-user__details">
+                                                                        <span class="m-card-user__name m--font-weight-500">{{ Auth::user()->name }}</span>
+                                                                        <a href="mailto:{{ Auth::user()->email }}" class="m-card-user__email m--font-weight-300 m-link">{{ Auth::user()->email }}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="m-dropdown__body">
+                                                                <div class="m-dropdown__content">
+                                                                    <ul class="m-nav m-nav--skin-light">
+                                                                        <li class="m-nav__item">
+                                                                            {{--<a href="{{ $user->profile() }}" class="m-nav__link">--}}
+                                                                            <a href="" class="m-nav__link">
+                                                                                <i class="m-nav__link-icon fa fa-user-edit"></i>
+                                                                                <span class="m-nav__link-title">
 																			<span class="m-nav__link-wrap">
 																				<span class="m-nav__link-text">Profile</span>
 																			</span>
 																		</span>
-																	</a>
-																</li>
-																<li class="m-nav__item">
-																	<a href="{{ route('logout') }}" class="m-nav__link">
-																		<i class="m-nav__link-icon fa fa-sign-out-alt"></i>
-																		<span class="m-nav__link-title">
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="m-nav__item">
+                                                                            <a href="{{ route('logout') }}" class="m-nav__link">
+                                                                                <i class="m-nav__link-icon fa fa-sign-out-alt"></i>
+                                                                                <span class="m-nav__link-title">
 																			<span class="m-nav__link-wrap">
 																				<span class="m-nav__link-text">Logout</span>
 																			</span>
 																		</span>
-																	</a>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-										</li>
-									</ul>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
 
-								</div>
+                                        </div>
+                                    </div>
+                                </div>
 							</div>
 						</div>
 					</div>
