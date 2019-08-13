@@ -65,8 +65,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
             "php artisan migrate --force",
-            "php artisan db:seed",
-            "npm run prod",
+            "php artisan db:seed --force",
             "php artisan nps:url"
         ]
     }
