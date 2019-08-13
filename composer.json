@@ -56,7 +56,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env.heroku') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
@@ -72,7 +72,8 @@
             "php artisan migrate:reset --force",
             "php artisan migrate --force",
             "php artisan db:seed --force",
-            "php artisan nps:url"
+            "php artisan nps:url",
+            "rm bootstrap/cache/config.php"
         ]
     }
 }
