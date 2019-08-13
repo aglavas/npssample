@@ -1,11 +1,5 @@
 <?php
 
-
-Route::get('test', function () {
-    return view('answer.success');
-});
-
-
 Route::view('/login', 'auth.login')->name('login');
 Route::post('/login', 'Auth\LoginController@login')->name('post.login');
 
