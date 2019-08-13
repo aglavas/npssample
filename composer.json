@@ -64,7 +64,9 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "php artisan set:up",
+            "php artisan migrate --force",
+            "php artisan db:seed",
+            "npm run prod",
             "php artisan nps:url"
         ]
     }
