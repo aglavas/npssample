@@ -1,5 +1,5 @@
 <div class="shadow p-3 mb-5 bg-white rounded">
-    <div class="card text-center" onclick="window.open('http://nps/survey/{{$survey->id}}', '_self')" style="cursor: pointer;">
+    <div class="card text-center" onclick="window.open({{ env('APP_URL') }}'/survey/{{$survey->id}}', '_self')" style="cursor: pointer;">
         <div class="card-body">
             <h4 class="card-title">{{$survey->name}}</h4>
             <h5>{{$survey->count}} Responses</h5>
