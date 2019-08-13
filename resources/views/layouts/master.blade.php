@@ -53,11 +53,13 @@
 							</div>
 						</div>
 
-                        <nav class="navbar navbar-default navbar-fixed-top">
-                            <div class="container">
-                                {{ Breadcrumbs::render('dashboard') }}
-                            </div>
-                        </nav>
+                        @if(Route::current()->getName() != 'get.answer')
+                            <nav class="navbar navbar-default navbar-fixed-top">
+                                <div class="container">
+                                    {{ Breadcrumbs::render('dashboard') }}
+                                </div>
+                            </nav>
+                        @endif
 
                         {{--<div class="row">--}}
                             {{--<div class="col-lg-6">--}}
@@ -116,25 +118,29 @@
                                                 {{--</ul>--}}
                                             {{--</li>--}}
                                         {{--</ul>--}}
-                                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                                <ul class="navbar-nav mr-auto">
-                                                    <li class="nav-item dropdown">
-                                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdowns" role="button" data-toggle="dropdown" data-target=".navbar-collapse" aria-haspopup="true">
-                                                            Dropdown
-                                                        </a>
-                                                        <nav class="collapse navbar-collapse" role="navigation">
-                                                            <div class="dropdown-menu navbar-collapse" aria-labelledby="navbarDropdown">
-                                                                <a class="dropdown-item" href="/">All</a>
-                                                                @foreach (App\Services\LanguageConfig::get() as $language)
-                                                                    <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
-                                                                @endforeach
-                                                            </div>
-                                                        </nav>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </nav>
+
+                                        @if(Route::current()->getName() != 'get.answer')
+
+                                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                                    <ul class="navbar-nav mr-auto">
+                                                        <li class="nav-item dropdown">
+                                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdowns" role="button" data-toggle="dropdown" data-target=".navbar-collapse" aria-haspopup="true">
+                                                                Dropdown
+                                                            </a>
+                                                            <nav class="collapse navbar-collapse" role="navigation">
+                                                                <div class="dropdown-menu navbar-collapse" aria-labelledby="navbarDropdown">
+                                                                    <a class="dropdown-item" href="/">All</a>
+                                                                    @foreach (App\Services\LanguageConfig::get() as $language)
+                                                                        <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
+                                                                    @endforeach
+                                                                </div>
+                                                            </nav>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </nav>
+                                        @endif
                                     </div>
                                     <div class="col-md-6">
                                         <div class="m-stack__item m-topbar__nav-wrapper">
@@ -144,9 +150,13 @@
                                                 <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
                                                     <a href="#" class="m-nav__link m-dropdown__toggle">
 												<span class="m-topbar__userpic">
-													@include('layouts.profile_area')
+                                                    @if(\Illuminate\Support\Facades\Auth::user() != null)
+                                                        @include('layouts.profile_area')
+                                                    @endif
 												</span>
-                                                        <span class="m-topbar__username m--hide">{{ Auth::user()->name }}</span>
+                                                        @if(\Illuminate\Support\Facades\Auth::user() != null)
+                                                            <span class="m-topbar__username m--hide">{{ Auth::user()->name }}</span>
+                                                        @endif
                                                     </a>
                                                     <div class="m-dropdown__wrapper">
                                                         <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
@@ -154,12 +164,16 @@
                                                             <div class="m-dropdown__header m--align-center" style="background: url('{{ asset('img/misc/user_profile_bg.jpg') }}'); background-size: cover;">
                                                                 <div class="m-card-user m-card-user--skin-dark">
                                                                     <div class="m-card-user__pic">
-                                                                        @include('layouts.profile_area')
+                                                                        @if(\Illuminate\Support\Facades\Auth::user() != null)
+                                                                            @include('layouts.profile_area')
+                                                                        @endif
                                                                     </div>
-                                                                    <div class="m-card-user__details">
-                                                                        <span class="m-card-user__name m--font-weight-500">{{ Auth::user()->name }}</span>
-                                                                        <a href="mailto:{{ Auth::user()->email }}" class="m-card-user__email m--font-weight-300 m-link">{{ Auth::user()->email }}</a>
-                                                                    </div>
+                                                                    @if(\Illuminate\Support\Facades\Auth::user() != null)
+                                                                        <div class="m-card-user__details">
+                                                                            <span class="m-card-user__name m--font-weight-500">{{ Auth::user()->name }}</span>
+                                                                            <a href="mailto:{{ Auth::user()->email }}" class="m-card-user__email m--font-weight-300 m-link">{{ Auth::user()->email }}</a>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                             <div class="m-dropdown__body">

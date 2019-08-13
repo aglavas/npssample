@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        SetUpCommand::class
+        SetUpCommand::class,
+        GenerateUrls::class
     ];
 
     /**

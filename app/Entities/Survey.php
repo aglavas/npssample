@@ -54,6 +54,16 @@ class Survey extends Model
     }
 
     /**
+     * Survey has many answers
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function answer()
+    {
+        return $this->hasMany(Answer::class, 'survey_id', 'id');
+    }
+
+    /**
      * Calculate percent
      *
      * @param $entity

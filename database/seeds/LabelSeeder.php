@@ -11,19 +11,6 @@ class LabelSeeder extends Seeder
      */
     public function run()
     {
-        \App\Entities\Label::create([
-            'en' => [
-                'content' => 'Pricing'
-            ],
-            'de-SW' => [
-                'content' => 'Pricing de SW'
-            ],
-            'de-DE' => [
-                'content' => 'Pricing de DE'
-            ],
-            'hr' => [
-                'content' => 'Cijena'
-            ]
-        ]);
+        factory(\App\Entities\Label::class, 5)->create();
     }
 }
