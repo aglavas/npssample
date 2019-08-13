@@ -66,6 +66,7 @@
             "chmod -R gu+w storage",
             "chmod -R guo+w storage",
             "chmod -R 777 storage",
+            "chmod -R 777 routes",
             "php artisan config:clear",
             "php artisan optimize",
             "php artisan migrate:reset --force",
