@@ -39,7 +39,7 @@ class SetUpCommand extends Command
      */
     public function handle()
     {
-        $this->call('migrate:fresh');
+        $this->call('migrate:fresh --force');
         $this->call('db:seed');
     }
 
