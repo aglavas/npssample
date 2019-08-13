@@ -63,6 +63,8 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "chmod -R gu+w storage",
+            "chmod -R guo+w storage",
             "php artisan config:clear",
             "php artisan optimize",
             "php artisan migrate:reset --force",
