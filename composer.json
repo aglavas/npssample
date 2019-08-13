@@ -63,7 +63,6 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "rm bootstrap/cache/config.php",
             "chmod -R gu+w storage",
             "chmod -R guo+w storage",
             "chmod -R 777 storage",
