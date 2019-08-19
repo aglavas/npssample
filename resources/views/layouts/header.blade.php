@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('metronic/vendors/base/vendors.bundle.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('metronic/vendors/custom/fullcalendar/fullcalendar.bundle.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('metronic/demo/default/base/style.bundle.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 <script defer src="{{ asset('metronic/vendors/base/vendors.bundle.js') }}"></script>
 <script defer src="{{ asset('metronic/demo/default/base/scripts.bundle.js') }}"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>

@@ -54,6 +54,14 @@ class Survey extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return env('APP_URL') . '/survery/' . $this->id;
+    }
+
+    /**
      * Survey has many answers
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

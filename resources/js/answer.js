@@ -1,28 +1,67 @@
+function getBuilder(part) {
+    return (id = 0, context) =>
+        context ? context.find(`${part}_${id}`) : $(`${part}_${id}`);
+}
+
 function answer() {
+    const getRating = getBuilder('#rating');
+
+    let selectedRating = null;
+    let previousRating = null;
+    let form = $("#answer-form");
+    let number = $(".number");
+
+    const showAdditional = () => {
+        if (selectedRating < 7) {
+            $(".additional-info").show();
+        } else {
+            $(".additional-info").hide();
+        }
+
+    };
 
     const init = () => {
-        let form = $("#answer-form");
 
-        $("#rating").change(function () {
-            let rating = this.value;
+        number.click(function () {
+            selectedRating = $(this).data("rating");
 
-            if (rating < 7) {
-                $(".additional-info").show();
+            if (previousRating === null) {
+                previousRating = $(this);
+                $(this).css("background-color", "yellow");
             } else {
-                $(".additional-info").hide();
+                previousRating.css("background-color", "white");
+                previousRating = $(this);
+                $(this).css("background-color", "yellow");
             }
+
+            showAdditional();
         });
 
         form.submit(function() {
             $(this).find(".filter-input").filter(function(){ return !this.value; }).attr("disabled", "disabled");
-            return true; // ensure form still submits
+            $("<input />").attr("type", "hidden")
+                .attr("name", "rating")
+                .attr("value", selectedRating)
+                .appendTo(this);
+            return true;
         });
+    };
 
-        form.find(".filter-input").prop( "disabled", false );
+    const validationInit = (rating) => {
+
+        if (rating !== '') {
+            selectedRating = rating;
+            previousRating =  getRating(rating);
+
+            previousRating.css("background-color", "yellow");
+
+            showAdditional();
+        }
     };
 
     return {
-        init
+        init,
+        validationInit,
     };
 }
 

@@ -1,20 +1,37 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+//
+//// Variables
+//@import 'variables';
+//
+//// Bootstrap
+//@import '~bootstrap/scss/bootstrap';
 
-// Variables
-@import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-
-a.custom-card,
-a.custom-card:hover {
-    color: inherit;
+.numbers {
+    display: flex;
+    flex: 1;
+    //min-height: 100vh;
+    align-items: center;
+    justify-content: center;
 }
 
-div.effect-round:hover:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
+.number {
+    border: .4rem solid black;
+    border-radius: 50%;
+    //border-radius: .5rem;
+    margin: 0.5rem;
+    //padding: 1rem .5rem;
+    transition: all .07s ease;
+    width: 10rem;
+    text-align: center;
+    color: white;
+    background: rgba(0,0,0,0);
+    text-shadow: 0 0 .5rem black;
+    font-size: 4rem;
+}
+
+.question-text {
+    text-align: center;
+    font-size: 4rem;
 }
