@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Str;
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+//$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+//
+//$host = $url["host"];
+//$username = $url["user"];
+//$password = $url["pass"];
+//$database = substr($url["path"], 1);
 
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
-
-
+//mysql://b8385e7bc90c37:80e074cd@eu-cdbr-west-02.cleardb.net/heroku_3a348240676fed0?reconnect=true
 return [
 
     /*
@@ -103,10 +103,14 @@ return [
 
         'your_heroku_mysql_connection' => array(
             'driver' => 'mysql',
-            'host' => $host,
-            'database' => $database,
-            'username' => $username,
-            'password' => $password,
+//            'host' => $host,
+            'host' => 'eu-cdbr-west-02.cleardb.net',
+//            'database' => $database,
+            'database' => 'heroku_3a348240676fed0',
+            'username' => 'b8385e7bc90c37',
+//            'username' => $username,
+            'password' => '80e074cd',
+//            'password' => $password,
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
