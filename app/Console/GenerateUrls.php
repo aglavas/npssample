@@ -50,7 +50,9 @@ class GenerateUrls extends Command
             }
         });
 
-        var_dump($langArray);
+        foreach ($langArray as $item) {
+            echo $item;
+        }
     }
 
     /**
