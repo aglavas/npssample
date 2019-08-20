@@ -72,8 +72,8 @@
             "php artisan migrate:reset --force",
             "php artisan migrate --force",
             "php artisan db:seed --force",
-            "php artisan nps:url",
-            "rm bootstrap/cache/config.php"
+            "rm bootstrap/cache/config.php",
+            "php artisan nps:url"
         ]
     }
 }
