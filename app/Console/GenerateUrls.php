@@ -51,7 +51,7 @@ class GenerateUrls extends Command
         });
 
         foreach ($langArray as $item) {
-            echo $item;
+            echo $item . '\n';
         }
     }
 
