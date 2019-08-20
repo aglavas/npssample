@@ -58,7 +58,7 @@ class Survey extends Model
      */
     public function getUrlAttribute()
     {
-        return env('APP_URL') . '/survery/' . $this->id;
+        return env('APP_URL') . '/survey/' . $this->id;
     }
 
     /**

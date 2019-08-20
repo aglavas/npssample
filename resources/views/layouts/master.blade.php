@@ -54,9 +54,9 @@
 						</div>
 
                         @if(Route::current()->getName() != 'get.answer')
-                            <nav class="navbar navbar-default navbar-fixed-top">
+                            <nav class="navbar navbar-default navbar-fixed-top navbar--small">
                                 <div class="container">
-                                    {{ Breadcrumbs::render('dashboard') }}
+                                    {{ Breadcrumbs::render() }}
                                 </div>
                             </nav>
                         @endif
@@ -87,7 +87,7 @@
 						<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
 							<div id="m_header_topbar" class="m-topbar m-stack m-stack--ver m-stack--general m-stack--fluid">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4 col-lg-6">
                                         {{--<ul class="nav navbar-nav">--}}
                                             {{--<li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown active">--}}
                                                 {{--<a href="javascript:;"> Layouts--}}
@@ -119,17 +119,16 @@
                                             {{--</li>--}}
                                         {{--</ul>--}}
 
-                                        @if(Route::current()->getName() != 'get.answer')
-
-                                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                        @if(Route::current()->getName() == 'dashboard')
+                                            <nav class="navbar navbar-expand navbar-light bg-light">
                                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                                     <ul class="navbar-nav mr-auto">
                                                         <li class="nav-item dropdown">
-                                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdowns" role="button" data-toggle="dropdown" data-target=".navbar-collapse" aria-haspopup="true">
+                                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdowns" role="button" data-toggle="dropdown" data-target=".navbar-expand" aria-haspopup="true">
                                                                 Dropdown
                                                             </a>
                                                             <nav class="collapse navbar-collapse" role="navigation">
-                                                                <div class="dropdown-menu navbar-collapse" aria-labelledby="navbarDropdown">
+                                                                <div class="dropdown-menu navbar-expand" aria-labelledby="navbarDropdown">
                                                                     <a class="dropdown-item" href="/">All</a>
                                                                     @foreach (App\Services\LanguageConfig::get() as $language)
                                                                         <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
@@ -142,7 +141,12 @@
                                             </nav>
                                         @endif
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4 breadcrumb-container-sm">
+                                        <div>
+                                            {{ Breadcrumbs::render() }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-6">
                                         <div class="m-stack__item m-topbar__nav-wrapper">
 
                                             <ul class="m-topbar__nav m-nav m-nav--inline">

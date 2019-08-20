@@ -27,11 +27,11 @@ function answer() {
 
             if (previousRating === null) {
                 previousRating = $(this);
-                $(this).css("background-color", "yellow");
+                $(this).toggleClass("number--active");
             } else {
-                previousRating.css("background-color", "white");
+                previousRating.toggleClass("number--active");
                 previousRating = $(this);
-                $(this).css("background-color", "yellow");
+                $(this).toggleClass("number--active");
             }
 
             showAdditional();

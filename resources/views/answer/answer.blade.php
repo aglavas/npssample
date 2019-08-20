@@ -22,10 +22,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
-            </div>
-            <div class="col-lg-6">
-                <div class="numbers">
+            {{--<div class="col-lg-3">--}}
+            {{--</div>--}}
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="numbers row">
                     <div id="rating_1" class="number" data-rating="1">
                         1
                     </div>
@@ -57,8 +57,6 @@
                         10
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
             </div>
         </div>
         <div class="row">

@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Survey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SurveyController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Show survey details
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Survey $survey
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, Survey $survey)
     {
-        dd($request->route('survey'));
+        $survey->load('answer.label');
 
         $user = Auth::user();
 
-        return view('admin.dashboard', compact('user'));
+        return view('admin.survey.index', compact(['user', 'survey']));
     }
 }

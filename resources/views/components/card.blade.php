@@ -3,6 +3,7 @@
         <div class="card-body">
             <h4 class="card-title">{{$survey->name}}</h4>
             <h5>{{$survey->count}} Responses</h5>
+            <h5>&nbsp;</h5>
             <canvas id="cardChart_{{$survey->id}}" width="400" height="400"></canvas>
             <br>
             <div class="row">
