@@ -25,6 +25,7 @@
 			<header id="m_header" class="m-grid__item m-header" m-minimize-offset="200" m-minimize-mobile-offset="200">
 				<div class="m-container m-container--fluid m-container--full-height">
 					<div class="m-stack m-stack--ver m-stack--desktop">
+                        @if(Route::current()->getName() != 'get.answer')
 						<div class="m-stack__item m-brand  m-brand--skin-dark">
 							<div class="m-stack m-stack--ver m-stack--general">
 								<div class="m-stack__item m-stack__item--middle m-brand__logo">
@@ -32,26 +33,27 @@
 										{{--<img data-src="{{ asset('img/logo.png') }}" alt="Logo" width="150" class="lazy-load">--}}
 									{{--</a>--}}
 								</div>
-								<div class="m-stack__item m-stack__item--middle m-brand__tools">
-									<!-- BEGIN: Left Aside Minimize Toggle -->
-									<a href="#" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block hide
-					 ">
-										<span></span>
-									</a>
-									<!-- END -->
-									<!-- BEGIN: Responsive Aside Left Menu Toggler -->
-									<a href="#" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
-										<span></span>
-									</a>
-									<!-- END -->
-									<!-- BEGIN: Topbar Toggler -->
-									<a id="m_aside_header_topbar_mobile_toggle" href="#" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
-										<i class="flaticon-more"></i>
-									</a>
-									<!-- BEGIN: Topbar Toggler -->
-								</div>
+                                    <div class="m-stack__item m-stack__item--middle m-brand__tools">
+                                        <!-- BEGIN: Left Aside Minimize Toggle -->
+                                        <a href="#" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block hide
+                         ">
+                                            <span></span>
+                                        </a>
+                                        <!-- END -->
+                                        <!-- BEGIN: Responsive Aside Left Menu Toggler -->
+                                        <a href="#" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
+                                            <span></span>
+                                        </a>
+                                        <!-- END -->
+                                        <!-- BEGIN: Topbar Toggler -->
+                                        <a id="m_aside_header_topbar_mobile_toggle" href="#" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+                                            <i class="flaticon-more"></i>
+                                        </a>
+                                        <!-- BEGIN: Topbar Toggler -->
+                                    </div>
 							</div>
 						</div>
+                        @endif
 
                         @if(Route::current()->getName() != 'get.answer')
                             <nav class="navbar navbar-default navbar-fixed-top navbar--small">
@@ -124,11 +126,11 @@
                                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                                     <ul class="navbar-nav mr-auto">
                                                         <li class="nav-item dropdown">
-                                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdowns" role="button" data-toggle="dropdown" data-target=".navbar-expand" aria-haspopup="true">
-                                                                Dropdown
+                                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-target=".navbar-expand" aria-haspopup="true">
+                                                                Countries
                                                             </a>
                                                             <nav class="collapse navbar-collapse" role="navigation">
-                                                                <div class="dropdown-menu navbar-expand" aria-labelledby="navbarDropdown">
+                                                                <div class="dropdown-menu navbar-expand flex-column" id="langDropdown" aria-labelledby="navbarDropdown">
                                                                     <a class="dropdown-item" href="/">All</a>
                                                                     @foreach (App\Services\LanguageConfig::get() as $language)
                                                                         <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
@@ -154,11 +156,11 @@
                                                 <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
                                                     <a href="#" class="m-nav__link m-dropdown__toggle">
 												<span class="m-topbar__userpic">
-                                                    @if(\Illuminate\Support\Facades\Auth::user() != null)
+                                                    @if(\Illuminate\Support\Facades\Auth::user() != null && (Route::current()->getName() != 'get.answer'))
                                                         @include('layouts.profile_area')
                                                     @endif
 												</span>
-                                                        @if(\Illuminate\Support\Facades\Auth::user() != null)
+                                                        @if(\Illuminate\Support\Facades\Auth::user() != null && (Route::current()->getName() != 'get.answer'))
                                                             <span class="m-topbar__username m--hide">{{ Auth::user()->name }}</span>
                                                         @endif
                                                     </a>
@@ -221,33 +223,35 @@
 				</div>
 			</header>
 
-			<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
-				<button type="button" class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn">
-					<i class="la la-close"></i>
-				</button>
+                <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+                    <button type="button" class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn">
+                        <i class="la la-close"></i>
+                    </button>
 
-				<div id="m_aside_left" class="m-grid__item m-aside-left m-aside-left--skin-dark">
-					<!-- Side Content -->
-					<div
-						id="m_ver_menu"
-						class="m-aside-menu m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark"
-						m-menu-vertical="1"
-						m-menu-scrollable="1"
-						m-menu-dropdown-timeout="500"
-						style="position: relative;">
-							@include('layouts.navigation')
-					</div>
-					<!-- END Side Content -->
-				</div>
+                    @if(Route::current()->getName() != 'get.answer')
+                        <div id="m_aside_left" class="m-grid__item m-aside-left m-aside-left--skin-dark">
+                            <!-- Side Content -->
+                            <div
+                                id="m_ver_menu"
+                                class="m-aside-menu m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark"
+                                m-menu-vertical="1"
+                                m-menu-scrollable="1"
+                                m-menu-dropdown-timeout="500"
+                                style="position: relative;">
+                                    @include('layouts.navigation')
+                            </div>
+                            <!-- END Side Content -->
+                        </div>
+                    @endif
 
-				<div class="m-grid__item m-grid__item--fluid m-wrapper">
-					<div class="m-content">
-						<div class="m-portlet m-portlet--bordered m-portlet--rounded m-portlet--responsive-mobile" id="main_portlet">
-							@yield('content')
-						</div>
-					</div>
-				</div>
-			</div>
+                    <div class="m-grid__item m-grid__item--fluid m-wrapper">
+                        <div class="m-content">
+                            <div class="m-portlet m-portlet--bordered m-portlet--rounded m-portlet--responsive-mobile" id="main_portlet">
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 			<footer class="m-grid__item	m-footer">
 				<div class="m-container m-container--fluid m-container--full-height m-page__container">
@@ -292,4 +296,27 @@
 			{{--@csrf--}}
 		{{--</form>--}}
 	</body>
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('#navbarDropdown').click( function(e) {e.preventDefault();
+
+                $('#langDropdown').toggle(function() {
+                    $(this).toggleClass("navbar-expand navbar-collapse");;
+                }, function() {
+                    $(this).toggleClass("navbar-collapse navbar-expand");;
+                });
+
+            return false; } );
+
+            // $('#changeMode').button().click(function(){
+            //     $('#playfield').toggle(function() {
+            //         $(this).toggleClass("gridView plainView");
+            //         //$(this).removeClass("gridView").addClass("plainView");
+            //     }, function() {
+            //         $(this).toggleClass("plainView gridView");
+            //         //$(this).removeClass("plainView").addClass("gridView");
+            //     });
+            // });
+        });
+</script>
 </html>
