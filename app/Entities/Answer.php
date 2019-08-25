@@ -2,11 +2,16 @@
 
 namespace App\Entities;
 
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
+    use Filterable;
+
     protected $fillable = ['survey_id', 'content', 'rating', 'label_id'];
+
+    protected $with = ['label'];
 
     /**
      * Answer belongs to survey
@@ -25,6 +30,6 @@ class Answer extends Model
      */
     public function label()
     {
-        return $this->belongsTo(Label::class, 'survey_id', 'id');
+        return $this->belongsTo(Label::class, 'label_id', 'id');
     }
 }

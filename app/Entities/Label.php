@@ -14,4 +14,6 @@ class Label extends Model
     public $translationModel = 'App\Entities\Translation\LabelTranslation';
 
     public $timestamps = false;
+
+    protected $fillable = ['title'];
 }

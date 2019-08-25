@@ -3,24 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Survey;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Repositories\AnswerRepository;
 
 class SurveyController extends Controller
 {
     /**
      * Show survey details
      *
-     * @param Request $request
      * @param Survey $survey
+     * @param AnswerRepository $answerRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request, Survey $survey)
+    public function index(Survey $survey, AnswerRepository $answerRepository)
     {
-        $survey->load('answer.label');
+        $answers = $answerRepository->searchAnswers();
 
-        $user = Auth::user();
+        return view('admin.survey.index', compact(['survey', 'answers']));
+    }
 
-        return view('admin.survey.index', compact(['user', 'survey']));
+    /**
+     * Get survey statistics
+     */
+    public function getStatistics()
+    {
+        dd('Under construction');
     }
 }

@@ -84,3 +84,49 @@
 .dropdown-display {
     height: 100px;
 }
+
+.rating-smiley {
+    font-size:40px;
+    display: inline;
+}
+
+.bc-div {
+    float: left;
+}
+
+.promoter-rating {
+    font-size:40px;
+    color: green;
+    display: inline;
+}
+
+.passives-rating {
+    font-size:40px;
+    color: grey;
+    display: inline;
+}
+
+.detractors-rating {
+    font-size:40px;
+    color: red;
+    display: inline;
+}
+
+.answer-timestamp {
+    color: grey;
+}
+
+.answer-content {
+    font-size: 1.5rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.button-grey {
+    background-color: Transparent !important;
+    background-repeat:no-repeat !important;
+    border: none !important;
+    cursor:pointer !important;
+    overflow: hidden !important;
+    outline:none !important;
+}

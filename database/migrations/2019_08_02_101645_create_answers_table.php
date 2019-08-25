@@ -18,7 +18,7 @@ class CreateAnswersTable extends Migration
             $table->integer('survey_id')->unsigned();
             $table->integer('rating');
             $table->integer('label_id')->unsigned()->nullable();
-            $table->text('content')->nullable();
+            $table->text('content')->default('');
             $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade');
             $table->foreign('label_id')->references('id')->on('labels')->onDelete('cascade');
             $table->timestamps();

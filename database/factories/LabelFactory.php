@@ -12,6 +12,8 @@ $factory->define(\App\Entities\Label::class, function (Faker $faker) {
 
     $localeArray = [];
 
+    $query['title'] = $faker->word;
+
     foreach ($languages as $language) {
         array_push($localeArray, $language->locale);
         $query[$language->locale]['content'] = $faker->sentence;

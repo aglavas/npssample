@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.css') }}">
 		<link rel="stylesheet" type="text/css" href="https://amcharts.com/lib/3/plugins/export/export.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.css">
+        {{--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">--}}
 
 		<script defer src="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
         <script defer src="{{ asset('js/app.js') }}"></script>
@@ -58,38 +59,63 @@
                             </div>
                         @endif
 
-                        @if(Route::current()->getName() != 'get.answer')
-                            <nav class="navbar navbar-default navbar-fixed-top navbar--small">
-                                <div class="container">
-                                    {{ Breadcrumbs::render() }}
-                                </div>
-                            </nav>
-                        @endif
+                        {{--<div id="m_header_topbar" class="m-topbar m-stack m-stack--ver m-stack--general m-stack--fluid">--}}
+                            {{--<div class="page-top">--}}
+
+                                        {{--@if(Route::current()->getName() != 'get.answer')--}}
+                                            {{--<nav class="navbar navbar-default navbar-fixed-top navbar--small">--}}
+                                                {{--<div class="container">--}}
+                                                    {{--<div class="row">--}}
+                                                        {{--<div class="col-lg-12">--}}
+                                                            {{--{{ Breadcrumbs::render() }}--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</nav>--}}
+                                        {{--@endif--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
 						<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
+                            <div class="bc-div">
+                                @if(Route::current()->getName() != 'get.answer')
+                                    <nav class="navbar navbar-default navbar-fixed-top navbar--small">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    {{ Breadcrumbs::render() }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                @endif
+                            </div>
 							<div id="m_header_topbar" class="m-topbar m-stack m-stack--ver m-stack--general m-stack--fluid">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-6">
-                                        @if(Route::current()->getName() == 'dashboard')
                                             <nav class="navbar navbar-expand navbar-light bg-light">
                                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                                    <ul class="navbar-nav mr-auto">
-                                                        <li class="nav-item dropdown">
-                                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-target=".navbar-expand" aria-haspopup="true">
-                                                                Countries
-                                                            </a>
-                                                            <nav class="collapse navbar-collapse" role="navigation">
-                                                                <div class="dropdown-menu navbar-expand flex-column" id="langDropdown" aria-labelledby="navbarDropdown">
-                                                                    <a class="dropdown-item" href="/">All</a>
-                                                                    @foreach (App\Services\LanguageConfig::get() as $language)
-                                                                        <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
-                                                                    @endforeach
-                                                                </div>
-                                                            </nav>
-                                                        </li>
-                                                    </ul>
+                                                    @if(Route::current()->getName() == 'dashboard')
+                                                        <ul class="navbar-nav mr-auto">
+                                                            <li class="nav-item dropdown">
+                                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-target=".navbar-expand" aria-haspopup="true">
+                                                                    Countries
+                                                                </a>
+                                                                <nav class="collapse navbar-collapse" role="navigation">
+                                                                    <div class="dropdown-menu navbar-expand flex-column" id="langDropdown" aria-labelledby="navbarDropdown">
+                                                                        <a class="dropdown-item" href="/">All</a>
+                                                                        @foreach (App\Services\LanguageConfig::get() as $language)
+                                                                            <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
+                                                                        @endforeach
+                                                                    </div>
+                                                                </nav>
+                                                            </li>
+                                                        </ul>
+                                                    @elseif(Route::current()->getName() == 'survey')
+                                                        <a class="navbar-brand" href="{{route('survey.statistics', Route::current()->parameters['survey']->id)}}">Statistics</a>
+                                                    @endif
                                                 </div>
                                             </nav>
-                                        @endif
                                     </div>
                                     <div class="col-md-4 breadcrumb-container-sm">
                                         <div>
@@ -186,7 +212,12 @@
                                 m-menu-scrollable="1"
                                 m-menu-dropdown-timeout="500"
                                 style="position: relative;">
-                                    @include('layouts.navigation')
+                                    <span class="m-menu__link-text">Score type</span>
+
+
+                                    <input type="checkbox">
+                                    <hr>
+                                    {{--@include('layouts.navigation')--}}
                             </div>
                             <!-- END Side Content -->
                         </div>
@@ -194,9 +225,9 @@
 
                     <div class="m-grid__item m-grid__item--fluid m-wrapper">
                         <div class="m-content">
-                            <div class="m-portlet m-portlet--bordered m-portlet--rounded m-portlet--responsive-mobile" id="main_portlet">
+
                                 @yield('content')
-                            </div>
+
                         </div>
                     </div>
                 </div>

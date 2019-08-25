@@ -12,5 +12,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Survey
     Route::get('survey/{survey}', 'SurveyController@index')->name('survey');
+    Route::get('survey/{survey}/statistics', 'SurveyController@getStatistics')->name('survey.statistics');
 });
 

@@ -22,13 +22,14 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param Request $request
      * @param Survey $survey
      * @param SurveyContact $surveyContact
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request, Survey $survey, SurveyContact $surveyContact)
     {
-        $user = Auth::user();
+        //$user = Auth::user();
 
         $surveys = $surveyContact->getAllSurveys($survey, $request);
 

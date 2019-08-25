@@ -3,15 +3,37 @@
 namespace App\Repositories;
 
 use App\Contracts\AnswerContact;
-use App\Contracts\SurveyContact;
+use App\Entities\Answer;
 use App\Entities\Label;
 use App\Entities\Question;
 use App\Entities\Survey;
-use App\Filters\SurveyFilter;
+use App\Filters\AnswerFilter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnswerRepository implements AnswerContact
 {
+    /**
+     * @var AnswerFilter
+     */
+    private $filter;
+
+    /**
+     * @var Answer
+     */
+    private $model;
+
+    /**
+     * AnswerRepository constructor.
+     * @param AnswerFilter $filter
+     * @param Answer $answer
+     */
+    public function __construct(AnswerFilter $filter, Answer $answer)
+    {
+        $this->filter = $filter;
+        $this->model = $answer;
+    }
+
     /**
      * Prepare answer view data
      *
@@ -84,5 +106,17 @@ class AnswerRepository implements AnswerContact
         }
 
         $survey->increment('count', 1);
+    }
+
+    /**
+     * Search answers
+     *
+     * @return mixed
+     */
+    public function searchAnswers()
+    {
+        $answers = $this->model->filter($this->filter)->paginate(5);
+
+        return $answers;
     }
 }

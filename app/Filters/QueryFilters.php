@@ -21,6 +21,8 @@ abstract class QueryFilters
      */
     protected $builder;
 
+    protected $related = null;
+
     /**
      * Create a new QueryFilters instance.
      *
@@ -41,14 +43,22 @@ abstract class QueryFilters
     {
         $this->builder = $builder;
 
+        if ($this->related) {
+            $this->builder->where($this->related['field'], '=', $this->related['value']);
+        }
+
         foreach ($this->filters() as $name => $value) {
             if (!method_exists($this, $name)) {
                 continue;
             }
 
-            if ($value || strlen($value)) {
+            if ($value === null) {
+                $value = '';
+            }
+
+            if ($value || strlen($value) || empty($value)) {
                 $this->$name($value);
-            } else {
+            } elseif (is_null($value)) {
                 $this->$name();
             }
         }

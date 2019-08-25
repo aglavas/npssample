@@ -33,7 +33,7 @@ class SurveySeeder extends Seeder
 
                         $label = $randomLabel->id;
                     } else {
-                        $content = null;
+                        $content = '';
                         $label = null;
                     }
 
