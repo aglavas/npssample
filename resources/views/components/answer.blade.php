@@ -4,11 +4,11 @@
             <div class="row">
                 <div class="col-lg-1 center">
                     @if ($answer->rating >= 7)
-                        <p class="rating-smiley">&#128515;  <div class="promoter-rating">{{$answer->rating}}</div></p>
+                        <p class="rating-smiley happy">&#128515;  <div class="promoter-rating">{{$answer->rating}}</div></p>
                     @elseif(($answer->rating >= 4) && ($answer->rating <= 7))
                         <p class="rating-smiley">&#128528;  <div class="passives-rating">{{$answer->rating}}</div></p>
                     @else
-                        <p class="rating-smiley">&#128542;  <div class="detractors-rating">{{$answer->rating}}</div></p>
+                        <p class="rating-smiley sad">&#128542;  <div class="detractors-rating">{{$answer->rating}}</div></p>
                     @endif
                 </div>
                 <div class="col-lg-11">

@@ -53,7 +53,7 @@ function answer() {
             selectedRating = rating;
             previousRating =  getRating(rating);
 
-            previousRating.css("background-color", "yellow");
+            previousRating.toggleClass("number--active");
 
             showAdditional();
         }

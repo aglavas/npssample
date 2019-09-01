@@ -8,13 +8,13 @@
             <br>
             <div class="row">
                 <div class="col-sm-4">
-                    <p style="font-size:40px">&#128515;</p> {{$survey->promotersPercent}}%
+                    <p class="happy" style="font-size:40px">&#128515;</p> {{$survey->promotersPercent}}%
                 </div>
                 <div class="col-sm-4">
                     <p style="font-size:40px">&#128528;</p> {{$survey->passivesPercent}}%
                 </div>
                 <div class="col-sm-4">
-                    <p style="font-size:40px">&#128542;</p> {{$survey->detractorsPercent}}%
+                    <p class="sad" style="font-size:40px">&#128542;</p> {{$survey->detractorsPercent}}%
                 </div>
             </div>
         </div>

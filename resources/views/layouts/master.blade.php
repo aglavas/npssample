@@ -7,8 +7,10 @@
 		<link rel="stylesheet" type="text/css" href="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.css') }}">
 		<link rel="stylesheet" type="text/css" href="https://amcharts.com/lib/3/plugins/export/export.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.css">
-        {{--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">--}}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 		<script defer src="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
         <script defer src="{{ asset('js/app.js') }}"></script>
         {{--<script defer src="{{ asset('js/main-react.js') }}"></script>--}}
@@ -21,7 +23,8 @@
 	</head>
 	{{--<body id="mainBody" onload="mainInit();" onbeforeunload="blockPage();" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">--}}
 	{{--<body id="mainBody" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">--}}
-	<body id="mainBody" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
+	{{--<body id="mainBody" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">--}}
+	<body id="mainBody" class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 			<header id="m_header" class="m-grid__item m-header" m-minimize-offset="200" m-minimize-mobile-offset="200">
 				<div class="m-container m-container--fluid m-container--full-height">
@@ -29,7 +32,8 @@
 
                         {{--sidebar--}}
 
-                        @if(Route::current()->getName() != 'get.answer')
+                        @if(Route::current()->getName() == 'survey')
+                            {{--<div class="m-stack__item m-brand  m-brand--skin-dark">--}}
                             <div class="m-stack__item m-brand  m-brand--skin-dark">
                                 <div class="m-stack m-stack--ver m-stack--general">
                                     <div class="m-stack__item m-stack__item--middle m-brand__logo">
@@ -39,20 +43,20 @@
                                     </div>
                                         <div class="m-stack__item m-stack__item--middle m-brand__tools">
                                             <!-- BEGIN: Left Aside Minimize Toggle -->
-                                            <a href="#" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block hide
-                             ">
-                                                <span></span>
-                                            </a>
-                                            <!-- END -->
-                                            <!-- BEGIN: Responsive Aside Left Menu Toggler -->
-                                            <a href="#" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
-                                                <span></span>
-                                            </a>
-                                            <!-- END -->
-                                            <!-- BEGIN: Topbar Toggler -->
-                                            <a id="m_aside_header_topbar_mobile_toggle" href="#" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
-                                                <i class="flaticon-more"></i>
-                                            </a>
+                                            {{--<a href="#" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block hide--}}
+                             {{--">--}}
+                                                {{--<span></span>--}}
+                                            {{--</a>--}}
+                                            {{--<!-- END -->--}}
+                                            {{--<!-- BEGIN: Responsive Aside Left Menu Toggler -->--}}
+                                            {{--<a href="#" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">--}}
+                                                {{--<span></span>--}}
+                                            {{--</a>--}}
+                                            {{--<!-- END -->--}}
+                                            {{--<!-- BEGIN: Topbar Toggler -->--}}
+                                            {{--<a id="m_aside_header_topbar_mobile_toggle" href="#" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">--}}
+                                                {{--<i class="flaticon-more"></i>--}}
+                                            {{--</a>--}}
                                             <!-- BEGIN: Topbar Toggler -->
                                         </div>
                                 </div>
@@ -202,8 +206,9 @@
                         <i class="la la-close"></i>
                     </button>
 
-                    @if(Route::current()->getName() != 'get.answer')
+                    @if(Route::current()->getName() == 'survey')
                         <div id="m_aside_left" class="m-grid__item m-aside-left m-aside-left--skin-dark">
+                        {{--<div id="m_aside_left" class="m-grid__item m-aside-left m-aside-left--skin-light">--}}
                             <!-- Side Content -->
                             <div
                                 id="m_ver_menu"
@@ -212,12 +217,7 @@
                                 m-menu-scrollable="1"
                                 m-menu-dropdown-timeout="500"
                                 style="position: relative;">
-                                    <span class="m-menu__link-text">Score type</span>
-
-
-                                    <input type="checkbox">
-                                    <hr>
-                                    {{--@include('layouts.navigation')--}}
+                                    @include('components.sidebarFilters')
                             </div>
                             <!-- END Side Content -->
                         </div>
@@ -277,15 +277,21 @@
 	</body>
 <script type="text/javascript">
         $(document).ready(function(){
-            $('#navbarDropdown').click( function(e) {e.preventDefault();
+            let url = "{{Request::url()}}";
+            let getParams = @json(Request()->all());
 
-                $('#langDropdown').toggle(function() {
-                    $(this).toggleClass("navbar-expand navbar-collapse");;
-                }, function() {
-                    $(this).toggleClass("navbar-collapse navbar-expand");;
-                });
+            const SidebarFilters = sidebarFilters();
+            SidebarFilters.init(url, getParams);
 
-            return false; } );
+                {{--@if ($errors->any())--}}
+            {{--let rating = {{old('rating', '')}}--}}
+                {{--Answer.validationInit(rating);--}}
+            {{--@endif--}}
+
+
+            // $('#my-select').searchableOptionList();
+
+
         });
 </script>
 </html>

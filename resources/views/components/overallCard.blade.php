@@ -8,13 +8,13 @@
             <br>
             <div class="row">
                 <div class="col-sm-4">
-                    <p style="font-size:40px">&#128515;</p> {{ App\Services\PercentCalculator::calculatePercent($surveyStatistic['promotersCount'], $surveyStatistic['passivesCount'], $surveyStatistic['detractorsCount'], $surveyStatistic['promotersCount']) }} %
+                    <p class="happy" style="font-size:40px">&#128515;</p> {{ App\Services\PercentCalculator::calculatePercent($surveyStatistic['promotersCount'], $surveyStatistic['passivesCount'], $surveyStatistic['detractorsCount'], $surveyStatistic['promotersCount']) }} %
                 </div>
                 <div class="col-sm-4">
                     <p style="font-size:40px">&#128528;</p> {{ App\Services\PercentCalculator::calculatePercent($surveyStatistic['promotersCount'], $surveyStatistic['passivesCount'], $surveyStatistic['detractorsCount'], $surveyStatistic['passivesCount'] ) }} %
                 </div>
                 <div class="col-sm-4">
-                    <p style="font-size:40px">&#128542;</p> {{ App\Services\PercentCalculator::calculatePercent($surveyStatistic['promotersCount'], $surveyStatistic['passivesCount'], $surveyStatistic['detractorsCount'], $surveyStatistic['detractorsCount']) }} %
+                    <p class="sad" style="font-size:40px">&#128542;</p> {{ App\Services\PercentCalculator::calculatePercent($surveyStatistic['promotersCount'], $surveyStatistic['passivesCount'], $surveyStatistic['detractorsCount'], $surveyStatistic['detractorsCount']) }} %
                 </div>
             </div>
         </div>

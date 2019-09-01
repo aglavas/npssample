@@ -5,7 +5,7 @@
     <div class="col-lg-3 border-right">
         <div class="align-next">
             <div>
-                <p style="font-size:40px">&#128515;</p>
+                <p class="happy smiley">&#128515;</p>
             </div>
             <div>
                 {{$survey->promotersPercent}}%
@@ -15,7 +15,7 @@
     <div class="col-lg-3 border-right">
         <div class="align-next">
             <div>
-                <p style="font-size:40px">&#128528;</p>
+                <p class="smiley">&#128528;</p>
             </div>
             <div>
                 {{$survey->passivesPercent}}%
@@ -25,7 +25,7 @@
     <div class="col-lg-3">
         <div class="align-next">
             <div>
-                <p style="font-size:40px">&#128542;</p>
+                <p class="sad smiley">&#128542;</p>
             </div>
             <div>
                 {{$survey->detractorsPercent}}%

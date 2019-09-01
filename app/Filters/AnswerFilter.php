@@ -22,9 +22,11 @@ class AnswerFilter extends QueryFilters
     {
         parent::__construct($request);
 
-        $survey = $request->route('survey')->id;
+        if ($request->route('survey')) {
+            $survey = $request->route('survey')->id;
 
-        $this->related['value'] = $survey;
+            $this->related['value'] = $survey;
+        }
     }
 
     /**
