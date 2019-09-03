@@ -17,6 +17,10 @@ class PercentCalculator
     {
         $total = $promoterCount + $passiveCount + $detractorCount;
 
+        if ($total === 0) {
+            return round(0, 2);
+        }
+
         $percent = ($asked / $total) * 100;
 
         return round($percent, 2);

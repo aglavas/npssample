@@ -1,8 +1,10 @@
 <?php
 
+namespace Seeds\Testing;
+
 use Illuminate\Database\Seeder;
 
-class QuestionSeeder extends Seeder
+class LabelSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +13,6 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Entities\Question::class)->create();
+        factory(\App\Entities\Label::class, 5)->create();
     }
 }

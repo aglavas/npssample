@@ -1,8 +1,10 @@
 <?php
 
+namespace Seeds\Testing;
+
 use Illuminate\Database\Seeder;
 
-class LanguageSeeder extends Seeder
+class QuestionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +13,6 @@ class LanguageSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Entities\Language::class, 10)->create();
+        factory(\App\Entities\Question::class)->create();
     }
 }

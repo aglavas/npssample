@@ -81,6 +81,10 @@ class Survey extends Model
     {
         $total = $this->promoters + $this->passives + $this->detractors;
 
+        if ($total === 0) {
+            return round(0, 2);
+        }
+
         $percent = ($entity / $total) * 100;
 
         return round($percent, 2);

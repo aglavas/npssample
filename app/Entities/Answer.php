@@ -32,4 +32,18 @@ class Answer extends Model
     {
         return $this->belongsTo(Label::class, 'label_id', 'id');
     }
+
+    /**
+     * Content mutator
+     *
+     * @param $content
+     */
+    public function setContentAttribute($content)
+    {
+        if ($content === null) {
+            $this->attributes['content'] = '';
+        } else {
+            $this->attributes['content'] = $content;
+        }
+    }
 }
