@@ -4,6 +4,10 @@ namespace App\Validators;
 
 class CustomValidator
 {
+    /**
+     * Hashing salt
+     */
+    const STATIC_SALT = '6Sqf4sS7mJXiPqVkKjNX';
 
     /**
      * Check hash integrity
@@ -16,7 +20,7 @@ class CustomValidator
      */
     public function checkHashIntegrity($message, $attribute, $rule, $parameters)
     {
-        $createdHash = md5($rule[0] . $rule[1]);
+        $createdHash = md5($rule[0] . $rule[1] . self::STATIC_SALT);
 
         if ($createdHash === $attribute) {
             return true;

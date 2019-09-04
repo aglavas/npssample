@@ -6,6 +6,7 @@ use App\Entities\Language;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use App\Validators\CustomValidator;
 
 class GenerateUrls extends Command
 {
@@ -46,7 +47,7 @@ class GenerateUrls extends Command
 
         $languages->each(function ($language) use (&$langArray) {
             for ($i = 1; $i <= 3; $i++) {
-                array_push($langArray, env('APP_URL') . "/answer?lang=" . $language->locale . "&event=" . $i . "&hash=" . md5($language->locale . $i));
+                array_push($langArray, env('APP_URL') . "/answer?lang=" . $language->locale . "&event=" . $i . "&hash=" . md5($language->locale . $i . CustomValidator::STATIC_SALT));
             }
         });
 
