@@ -11,6 +11,7 @@ use App\Entities\Survey;
 use App\Filters\AnswerFilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mpclarkson\Laravel\Freshdesk\FreshdeskFacade as Freshdesk;
 
 class AnswerRepository implements AnswerContact
 {
@@ -113,6 +114,17 @@ class AnswerRepository implements AnswerContact
             $survey->increment('passives', 1);
         } else {
             $survey->increment('detractors', 1);
+
+            $ticketApi = Freshdesk::tickets();
+
+            $result = $ticketApi->create([
+                'email' => 'test@mail.com',
+                'subject' => 'Not satisfied',
+                'status' => 2,
+                'priority' => 3,
+                'description' => 'test',
+            ]);
+
         }
 
         $survey->increment('count', 1);
