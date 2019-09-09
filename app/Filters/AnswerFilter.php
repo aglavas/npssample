@@ -58,4 +58,46 @@ class AnswerFilter extends QueryFilters
     {
         $this->builder->latest();
     }
+
+    /**
+     * Filter answers by score
+     *
+     * @param $score
+     */
+    public function score($score)
+    {
+        if ($score === 'promoters') {
+            $this->builder->where('rating', '>=', 7);
+        } elseif ($score === 'passives') {
+            $this->builder->where('rating', '<', 7)->where('rating', '>=', 4);
+        } elseif ($score === 'detractors') {
+            $this->builder->where('rating', '<', 4);
+        } elseif ($score === 'all') {
+            $this->builder->where('rating', '!=', '');
+        }
+    }
+
+    /**
+     * Filter answers by comment content
+     *
+     * @param $comments
+     */
+    public function comments($comments)
+    {
+        if ($comments === 'true') {
+            $this->builder->where('content', '!=', '');
+        }
+    }
+
+    /**
+     * Filter answers by labels
+     *
+     * @param $labels
+     */
+    public function labels($labels)
+    {
+        if (is_array($labels)) {
+            $this->builder->whereIn('label_id',  $labels);
+        }
+    }
 }
