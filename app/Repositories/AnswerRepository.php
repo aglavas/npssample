@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\AnswerContact;
 use App\Entities\Answer;
+use App\Entities\AnswerTracking;
 use App\Entities\Label;
 use App\Entities\Question;
 use App\Entities\Survey;
@@ -85,9 +86,11 @@ class AnswerRepository implements AnswerContact
      *
      * @param Request $request
      * @param Survey $survey
+     * @param AnswerTracking $answerTracking
+     * @param string $cookieName
      * @return mixed|void
      */
-    public function createAnswer(Request $request, Survey $survey)
+    public function createAnswer(Request $request, Survey $survey, AnswerTracking $answerTracking, string $cookieName)
     {
         $rating = $request->input('rating');
         $lang = $request->input('lang');
@@ -96,6 +99,13 @@ class AnswerRepository implements AnswerContact
         $survey = $survey->where('lang', $lang)->where('event_type', $event)->first();
 
         $survey->answer()->create($request->input());
+
+        $answerTracking->create(
+            [
+                'cookie_name' => $cookieName,
+                'cookie_value' => $request->cookie($cookieName),
+            ]
+        );
 
         if ($rating >= 7) {
             $survey->increment('promoters', 1);

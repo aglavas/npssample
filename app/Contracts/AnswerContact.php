@@ -2,6 +2,7 @@
 
 namespace App\Contracts;
 
+use App\Entities\AnswerTracking;
 use App\Entities\Label;
 use App\Entities\Question;
 use App\Entities\Survey;
@@ -24,7 +25,9 @@ interface AnswerContact
      *
      * @param Request $request
      * @param Survey $survey
+     * @param AnswerTracking $answerTracking
+     * @param string $cookieValue
      * @return mixed
      */
-    public function createAnswer(Request $request, Survey $survey);
+    public function createAnswer(Request $request, Survey $survey, AnswerTracking $answerTracking, string $cookieValue);
 }
