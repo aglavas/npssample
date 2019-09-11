@@ -279,3 +279,17 @@
 		</div>
 	</body>
 </html>
+<script type="text/javascript">
+    const navbarDropdown = $('#navbarDropdown');
+    const langDropdown = $('#langDropdown');
+
+    navbarDropdown.click( function(e) {e.preventDefault();
+        langDropdown.toggle(function() {
+            $(this).toggleClass("navbar-expand navbar-collapse");
+        }, function() {
+            $(this).toggleClass("navbar-collapse navbar-expand");
+        });
+
+        return false;
+    });
+</script>

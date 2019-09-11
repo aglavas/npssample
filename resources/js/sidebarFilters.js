@@ -6,8 +6,6 @@ function getBuilder(part) {
 function sidebarFilters() {
     const labelsSol = $('.labels-sol');
     const scoreDiv = $('.score-div');
-    const navbarDropdown = $('#navbarDropdown');
-    const langDropdown = $('#langDropdown');
     const labelOnRadio = $('#labelOnRadio');
     const labelOffRadio = $('#labelOffRadio');
     const labelRadioButtons = $('input[type=radio][name=groupOfDefaultRadios]');
@@ -42,15 +40,6 @@ function sidebarFilters() {
             labelsSol.select2({width: "200px"});
         } );
 
-        navbarDropdown.click( function(e) {e.preventDefault();
-            langDropdown.toggle(function() {
-                $(this).toggleClass("navbar-expand navbar-collapse");
-            }, function() {
-                $(this).toggleClass("navbar-collapse navbar-expand");
-            });
-
-            return false;
-        });
 
         scoreDiv.click(function () {
             selectedScore = $(this).data("score");

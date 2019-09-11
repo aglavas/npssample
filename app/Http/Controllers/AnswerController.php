@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\AnswerTrackingContract;
-use App\Entities\AnswerTracking;
 use App\Contracts\AnswerContract;
-use App\Entities\Answer;
 use App\Entities\Label;
 use App\Entities\Question;
 use App\Entities\Survey;
