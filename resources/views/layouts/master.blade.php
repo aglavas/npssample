@@ -32,7 +32,7 @@
 
                         {{--sidebar--}}
 
-                        @if(Route::current()->getName() == 'survey')
+                        @if(Route::current()->getName() != 'get.answer')
                             {{--<div class="m-stack__item m-brand  m-brand--skin-dark">--}}
                             <div class="m-stack__item m-brand  m-brand--skin-dark">
                                 <div class="m-stack m-stack--ver m-stack--general">
@@ -94,119 +94,122 @@
                                     </nav>
                                 @endif
                             </div>
-							<div id="m_header_topbar" class="m-topbar m-stack m-stack--ver m-stack--general m-stack--fluid">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-6">
-                                            <nav class="navbar navbar-expand navbar-light bg-light">
-                                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                                    @if(Route::current()->getName() == 'dashboard')
-                                                        <ul class="navbar-nav mr-auto">
-                                                            <li class="nav-item dropdown">
-                                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-target=".navbar-expand" aria-haspopup="true">
-                                                                    Countries
-                                                                </a>
-                                                                <nav class="collapse navbar-collapse" role="navigation">
-                                                                    <div class="dropdown-menu navbar-expand flex-column" id="langDropdown" aria-labelledby="navbarDropdown">
-                                                                        <a class="dropdown-item" href="/">All</a>
-                                                                        @foreach (App\Services\LanguageConfig::get() as $language)
-                                                                            <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
-                                                                        @endforeach
-                                                                    </div>
-                                                                </nav>
-                                                            </li>
-                                                        </ul>
-                                                    @elseif(Route::current()->getName() == 'survey')
-                                                        <a class="navbar-brand" href="{{route('survey.statistics', Route::current()->parameters['survey']->id)}}">Statistics</a>
-                                                    @endif
-                                                </div>
-                                            </nav>
-                                    </div>
-                                    <div class="col-md-4 breadcrumb-container-sm">
-                                        <div>
-                                            {{ Breadcrumbs::render() }}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-lg-6">
-                                        <div class="m-stack__item m-topbar__nav-wrapper">
 
-                                            <ul class="m-topbar__nav m-nav m-nav--inline">
-
-                                                <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
-                                                    <a href="#" class="m-nav__link m-dropdown__toggle">
-												<span class="m-topbar__userpic">
-                                                    @if(\Illuminate\Support\Facades\Auth::user() != null && (Route::current()->getName() != 'get.answer'))
-                                                        @include('layouts.profile_area')
-                                                    @endif
-												</span>
-                                                        @if(\Illuminate\Support\Facades\Auth::user() != null && (Route::current()->getName() != 'get.answer'))
-                                                            <span class="m-topbar__username m--hide">{{ Auth::user()->name }}</span>
+                            @if(Route::current()->getName() != 'get.answer')
+                                <div id="m_header_topbar" class="m-topbar m-stack m-stack--ver m-stack--general m-stack--fluid">
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-6">
+                                                <nav class="navbar navbar-expand navbar-light bg-light">
+                                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                                        @if(Route::current()->getName() == 'dashboard')
+                                                            <ul class="navbar-nav mr-auto">
+                                                                <li class="nav-item dropdown">
+                                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-target=".navbar-expand" aria-haspopup="true">
+                                                                        Countries
+                                                                    </a>
+                                                                    <nav class="collapse navbar-collapse" role="navigation">
+                                                                        <div class="dropdown-menu navbar-expand flex-column" id="langDropdown" aria-labelledby="navbarDropdown">
+                                                                            <a class="dropdown-item" href="/">All</a>
+                                                                            @foreach (App\Services\LanguageConfig::get() as $language)
+                                                                                <a class="dropdown-item" href="/?locale={{$language->locale}}">{{$language->country}}</a>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </nav>
+                                                                </li>
+                                                            </ul>
+                                                        @elseif(Route::current()->getName() == 'survey')
+                                                            <a class="navbar-brand" href="{{route('survey.statistics', Route::current()->parameters['survey']->id)}}">Statistics</a>
                                                         @endif
-                                                    </a>
-                                                    <div class="m-dropdown__wrapper">
-                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                                                        <div class="m-dropdown__inner">
-                                                            <div class="m-dropdown__header m--align-center" style="background: url('{{ asset('img/misc/user_profile_bg.jpg') }}'); background-size: cover;">
-                                                                <div class="m-card-user m-card-user--skin-dark">
-                                                                    <div class="m-card-user__pic">
+                                                    </div>
+                                                </nav>
+                                        </div>
+                                        <div class="col-md-4 breadcrumb-container-sm">
+                                            <div>
+                                                {{ Breadcrumbs::render() }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-6">
+                                            <div class="m-stack__item m-topbar__nav-wrapper">
+
+                                                <ul class="m-topbar__nav m-nav m-nav--inline">
+
+                                                    <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
+                                                        <a href="#" class="m-nav__link m-dropdown__toggle">
+                                                    <span class="m-topbar__userpic">
+                                                        @if(\Illuminate\Support\Facades\Auth::user() != null && (Route::current()->getName() != 'get.answer'))
+                                                            @include('layouts.profile_area')
+                                                        @endif
+                                                    </span>
+                                                            @if(\Illuminate\Support\Facades\Auth::user() != null && (Route::current()->getName() != 'get.answer'))
+                                                                <span class="m-topbar__username m--hide">{{ Auth::user()->name }}</span>
+                                                            @endif
+                                                        </a>
+                                                        <div class="m-dropdown__wrapper">
+                                                            <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                            <div class="m-dropdown__inner">
+                                                                <div class="m-dropdown__header m--align-center" style="background: url('{{ asset('img/misc/user_profile_bg.jpg') }}'); background-size: cover;">
+                                                                    <div class="m-card-user m-card-user--skin-dark">
+                                                                        <div class="m-card-user__pic">
+                                                                            @if(\Illuminate\Support\Facades\Auth::user() != null)
+                                                                                @include('layouts.profile_area')
+                                                                            @endif
+                                                                        </div>
                                                                         @if(\Illuminate\Support\Facades\Auth::user() != null)
-                                                                            @include('layouts.profile_area')
+                                                                            <div class="m-card-user__details">
+                                                                                <span class="m-card-user__name m--font-weight-500">{{ Auth::user()->name }}</span>
+                                                                                <a href="mailto:{{ Auth::user()->email }}" class="m-card-user__email m--font-weight-300 m-link">{{ Auth::user()->email }}</a>
+                                                                            </div>
                                                                         @endif
                                                                     </div>
-                                                                    @if(\Illuminate\Support\Facades\Auth::user() != null)
-                                                                        <div class="m-card-user__details">
-                                                                            <span class="m-card-user__name m--font-weight-500">{{ Auth::user()->name }}</span>
-                                                                            <a href="mailto:{{ Auth::user()->email }}" class="m-card-user__email m--font-weight-300 m-link">{{ Auth::user()->email }}</a>
-                                                                        </div>
-                                                                    @endif
                                                                 </div>
-                                                            </div>
-                                                            <div class="m-dropdown__body">
-                                                                <div class="m-dropdown__content">
-                                                                    <ul class="m-nav m-nav--skin-light">
-                                                                        <li class="m-nav__item">
-                                                                            {{--<a href="{{ $user->profile() }}" class="m-nav__link">--}}
-                                                                            <a href="" class="m-nav__link">
-                                                                                <i class="m-nav__link-icon fa fa-user-edit"></i>
-                                                                                <span class="m-nav__link-title">
-																			<span class="m-nav__link-wrap">
-																				<span class="m-nav__link-text">Profile</span>
-																			</span>
-																		</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="m-nav__item">
-                                                                            <a href="{{ route('logout') }}" class="m-nav__link">
-                                                                                <i class="m-nav__link-icon fa fa-sign-out-alt"></i>
-                                                                                <span class="m-nav__link-title">
-																			<span class="m-nav__link-wrap">
-																				<span class="m-nav__link-text">Logout</span>
-																			</span>
-																		</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
+                                                                <div class="m-dropdown__body">
+                                                                    <div class="m-dropdown__content">
+                                                                        <ul class="m-nav m-nav--skin-light">
+                                                                            <li class="m-nav__item">
+                                                                                {{--<a href="{{ $user->profile() }}" class="m-nav__link">--}}
+                                                                                <a href="" class="m-nav__link">
+                                                                                    <i class="m-nav__link-icon fa fa-user-edit"></i>
+                                                                                    <span class="m-nav__link-title">
+                                                                                <span class="m-nav__link-wrap">
+                                                                                    <span class="m-nav__link-text">Profile</span>
+                                                                                </span>
+                                                                            </span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="m-nav__item">
+                                                                                <a href="{{ route('logout') }}" class="m-nav__link">
+                                                                                    <i class="m-nav__link-icon fa fa-sign-out-alt"></i>
+                                                                                    <span class="m-nav__link-title">
+                                                                                <span class="m-nav__link-wrap">
+                                                                                    <span class="m-nav__link-text">Logout</span>
+                                                                                </span>
+                                                                            </span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                                    </li>
+                                                </ul>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-							</div>
+                            @endif
 						</div>
 					</div>
 				</div>
 			</header>
 
                 <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
-                    <button type="button" class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn">
-                        <i class="la la-close"></i>
-                    </button>
+                    {{--<button type="button" class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn">--}}
+                        {{--<i class="la la-close"></i>--}}
+                    {{--</button>--}}
 
-                    @if(Route::current()->getName() == 'survey')
+                    @if(Route::current()->getName() != 'get.answer')
                         <div id="m_aside_left" class="m-grid__item m-aside-left m-aside-left--skin-dark">
                         {{--<div id="m_aside_left" class="m-grid__item m-aside-left m-aside-left--skin-light">--}}
                             <!-- Side Content -->
@@ -217,7 +220,11 @@
                                 m-menu-scrollable="1"
                                 m-menu-dropdown-timeout="500"
                                 style="position: relative;">
+                                @if(Route::current()->getName() == 'survey')
                                     @include('components.sidebarFilters')
+                                @else
+                                    {{--empty sidebar--}}
+                                @endif
                             </div>
                             <!-- END Side Content -->
                         </div>
@@ -232,66 +239,43 @@
                     </div>
                 </div>
 
-			<footer class="m-grid__item	m-footer">
-				<div class="m-container m-container--fluid m-container--full-height m-page__container">
-					<div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
-						<div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
-							<span class="m-footer__copyright">
+            @if(Route::current()->getName() != 'get.answer')
 
-							</span>
-						</div>
-						<?php
+                <footer class="m-grid__item	m-footer">
+                    <div class="m-container m-container--fluid m-container--full-height m-page__container">
+                        <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
+                            <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
+                                <span class="m-footer__copyright">
 
-						if(count($errors))
-						{
-							?>
-							<div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
-								<ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
-									<li class="m-nav__item">
-										<a href="javascript:displayErrors('error-messages');" title="{{ __('global.errors') }}" class="m-nav__link" data-container="body" data-toggle="m-tooltip" data-placement="top">
-											<span class="m-badge m-badge--danger m-badge--wide">
-												<i class="fa fa-exclamation-triangle"></i> {{ count($errors) }}
-											</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<?php
-						}
+                                </span>
+                            </div>
+                            <?php
 
-						?>
-					</div>
-				</div>
-			</footer>
+                            if(count($errors))
+                            {
+                                ?>
+                                <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
+                                    <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
+                                        <li class="m-nav__item">
+                                            <a href="javascript:displayErrors('error-messages');" title="{{ __('global.errors') }}" class="m-nav__link" data-container="body" data-toggle="m-tooltip" data-placement="top">
+                                                <span class="m-badge m-badge--danger m-badge--wide">
+                                                    <i class="fa fa-exclamation-triangle"></i> {{ count($errors) }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <?php
+                            }
+
+                            ?>
+                        </div>
+                    </div>
+                </footer>
+            @endif
 		</div>
-
 		<div id="m_scroll_top" class="m-scroll-top" title="{{ __('global.back-to-top') }}" data-container="body" data-toggle="m-tooltip" data-placement="top">
 			<i class="la la-arrow-up"></i>
 		</div>
-
-		{{--<span id="error-messages" hidden>{{ json_encode($errors->all()) }}</span>--}}
-
-		{{--<form id="logout-form" action="{{ route('logout') }}" method="post" hidden>--}}
-			{{--@csrf--}}
-		{{--</form>--}}
 	</body>
-<script type="text/javascript">
-        $(document).ready(function(){
-            let url = "{{Request::url()}}";
-            let getParams = @json(Request()->all());
-
-            const SidebarFilters = sidebarFilters();
-            SidebarFilters.init(url, getParams);
-
-                {{--@if ($errors->any())--}}
-            {{--let rating = {{old('rating', '')}}--}}
-                {{--Answer.validationInit(rating);--}}
-            {{--@endif--}}
-
-
-            // $('#my-select').searchableOptionList();
-
-
-        });
-</script>
 </html>

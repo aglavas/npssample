@@ -27,12 +27,12 @@
             <label for="switchComments">With comments</label>
         </span>
     </div>
-    <div class="form-group">
-        <span class="switch">
-            <input type="checkbox" class="switch" id="switchIdentity">
-            <label for="switchIdentity">With identity</label>
-        </span>
-    </div>
+    {{--<div class="form-group">--}}
+        {{--<span class="switch">--}}
+            {{--<input type="checkbox" class="switch" id="switchIdentity">--}}
+            {{--<label for="switchIdentity">With identity</label>--}}
+        {{--</span>--}}
+    {{--</div>--}}
 </div>
 <hr>
 <div class="sidebar-filters">
@@ -60,4 +60,12 @@
     <button id="searchButton" type="button" class="btn btn-primary">Search</button>
     <button id="resetButton" type="button" class="btn btn-danger">Reset</button>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        let url = "{{Request::url()}}";
+        let getParams = @json(Request()->all());
 
+        const SidebarFilters = sidebarFilters();
+        SidebarFilters.init(url, getParams);
+    });
+</script>

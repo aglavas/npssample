@@ -12,7 +12,7 @@ function sidebarFilters() {
     const labelOffRadio = $('#labelOffRadio');
     const labelRadioButtons = $('input[type=radio][name=groupOfDefaultRadios]');
     const switchComments = $('#switchComments');
-    const switchIdentity = $('#switchIdentity');
+    // const switchIdentity = $('#switchIdentity');
     const searchButton = $('#searchButton');
     const resetButton = $('#resetButton');
     const getScore = getBuilder('#score');
@@ -20,7 +20,7 @@ function sidebarFilters() {
     let selectedScore = null;
     let previousScore = null;
     let withComments = false;
-    let withIdentity = false;
+    // let withIdentity = false;
     let withLabels = false;
 
     const init = (surveyUrl, getParams) => {
@@ -73,13 +73,13 @@ function sidebarFilters() {
             }
         });
 
-        switchIdentity.change(function() {
-            if(this.checked) {
-                withIdentity = true;
-            } else {
-                withIdentity = false;
-            }
-        });
+        // switchIdentity.change(function() {
+        //     if(this.checked) {
+        //         withIdentity = true;
+        //     } else {
+        //         withIdentity = false;
+        //     }
+        // });
 
         labelRadioButtons.change(function() {
             if (this.value == 'off') {
@@ -102,9 +102,9 @@ function sidebarFilters() {
                 query = query + `comments=true&`;
             }
 
-            if (withIdentity) {
-                query = query + `identity=true&`;
-            }
+            // if (withIdentity) {
+            //     query = query + `identity=true&`;
+            // }
 
             if (withLabels) {
                 let selectedLabels = labelsSol.select2('data');
@@ -140,10 +140,10 @@ function sidebarFilters() {
                 switchComments.prop('checked', true);
             }
 
-            if (key === 'identity') {
-                withIdentity = true;
-                switchIdentity.prop('checked', true);
-            }
+            // if (key === 'identity') {
+            //     withIdentity = true;
+            //     switchIdentity.prop('checked', true);
+            // }
 
             if (key === 'labels') {
                 withLabels = true;

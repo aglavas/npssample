@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use App\Contracts\AnswerContact;
+use App\Contracts\AnswerContract;
+use App\Contracts\AnswerTrackingContract;
 use App\Contracts\SurveyContact;
 use App\Repositories\AnswerRepository;
+use App\Repositories\AnswerTrackingRepository;
 use App\Repositories\SurveyRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(SurveyContact::class, SurveyRepository::class);
-        $this->app->bind(AnswerContact::class, AnswerRepository::class);
+        $this->app->bind(AnswerContract::class, AnswerRepository::class);
+        $this->app->bind(AnswerTrackingContract::class, AnswerTrackingRepository::class);
     }
 
     /**

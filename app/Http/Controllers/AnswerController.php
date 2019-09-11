@@ -2,39 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\AnswerTrackingContract;
 use App\Entities\AnswerTracking;
-use App\Contracts\AnswerContact;
+use App\Contracts\AnswerContract;
 use App\Entities\Answer;
 use App\Entities\Label;
 use App\Entities\Question;
 use App\Entities\Survey;
 use App\Http\Requests\AnswerGetRequest;
 use App\Http\Requests\AnswerStoreRequest;
+use App\Services\CookieManager;
 use Illuminate\Http\Response;
 
 class AnswerController extends Controller
 {
     /**
+     * Return live answer page
+     *
      * @param AnswerGetRequest $request
      * @param Question $question
      * @param Label $label
-     * @param AnswerContact $answerContact
+     * @param AnswerContract $answerContact
+     * @param CookieManager $cookieManager
      * @return Response
      */
-    public function index(AnswerGetRequest $request, Question $question, Label $label, AnswerContact $answerContact)
+    public function index(AnswerGetRequest $request, Question $question, Label $label, AnswerContract $answerContact, CookieManager $cookieManager)
     {
         $result = $answerContact->prepareAnswerViewData($request, $question, $label);
 
         $lang = $request->input('lang');
         $event = $request->input('event');
 
-        $cookieName = "nps-answer-$lang-$event";
+        $cookie = $cookieManager->addCookie($request, $event, $lang);
 
-        if ($request->hasCookie($cookieName) == true) {
-            $response = new Response(view('answer.answer')->with($result));
-        } else {
-            $response = new Response(view('answer.answer')->with($result));
-            $response->withCookie(cookie($cookieName, substr(str_shuffle(MD5(microtime())), 0, 20), time() + (10 * 365 * 24 * 60 * 60)));
+        $response = new Response(view('answer.answer')->with($result));
+
+        if ($cookie) {
+            $response->withCookie($cookie);
         }
 
         return $response;
@@ -44,30 +48,25 @@ class AnswerController extends Controller
      * Store answer entity
      *
      * @param AnswerStoreRequest $request
-     * @param Answer $answer
      * @param Survey $survey
-     * @param AnswerContact $answerContact
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param AnswerContract $answerContact
+     * @param AnswerTrackingContract $trackingContract
+     * @param CookieManager $cookieManager
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function store(AnswerStoreRequest $request, Answer $answer, Survey $survey, AnswerContact $answerContact, AnswerTracking $answerTracking)
+    public function store(AnswerStoreRequest $request, Survey $survey, AnswerContract $answerContact, AnswerTrackingContract $trackingContract, CookieManager $cookieManager)
     {
         $lang = $request->input('lang');
         $event = $request->input('event');
 
-        $cookieName = "nps-answer-$lang-$event";
+        $cookieName = $cookieManager->checkCookieTracking($request, $event, $lang, $trackingContract);
 
-        if ($request->hasCookie($cookieName) == false) {
+        if (!$cookieName) {
             abort(403);
-        } else {
-            $result = $answerTracking->where('cookie_name', $cookieName)->where('cookie_value', $request->cookie($cookieName))->count();
-
-            if ($result) {
-                abort(403);
-            }
         }
 
         try {
-            $answerContact->createAnswer($request, $survey, $answerTracking, $cookieName);
+            $answerContact->createAnswer($request, $survey, $trackingContract, $cookieName);
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', 'There was an unexpected error while saving feedback.');
         }

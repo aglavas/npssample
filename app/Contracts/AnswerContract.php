@@ -2,13 +2,12 @@
 
 namespace App\Contracts;
 
-use App\Entities\AnswerTracking;
 use App\Entities\Label;
 use App\Entities\Question;
 use App\Entities\Survey;
 use Illuminate\Http\Request;
 
-interface AnswerContact
+interface AnswerContract
 {
     /**
      * Prepare answer view data
@@ -25,9 +24,9 @@ interface AnswerContact
      *
      * @param Request $request
      * @param Survey $survey
-     * @param AnswerTracking $answerTracking
+     * @param AnswerTrackingContract $trackingContract
      * @param string $cookieValue
      * @return mixed
      */
-    public function createAnswer(Request $request, Survey $survey, AnswerTracking $answerTracking, string $cookieValue);
+    public function createAnswer(Request $request, Survey $survey, AnswerTrackingContract $trackingContract, string $cookieValue);
 }

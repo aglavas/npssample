@@ -29,8 +29,6 @@ class DashboardController extends Controller
      */
     public function index(Request $request, Survey $survey, SurveyContact $surveyContact)
     {
-        //$user = Auth::user();
-
         $surveys = $surveyContact->getAllSurveys($survey, $request);
 
         $surveyStatistic = $surveyContact->getSurveysOverview($survey);

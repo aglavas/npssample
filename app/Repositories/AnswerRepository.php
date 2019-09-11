@@ -2,18 +2,17 @@
 
 namespace App\Repositories;
 
-use App\Contracts\AnswerContact;
+use App\Contracts\AnswerContract;
+use App\Contracts\AnswerTrackingContract;
 use App\Entities\Answer;
-use App\Entities\AnswerTracking;
 use App\Entities\Label;
 use App\Entities\Question;
 use App\Entities\Survey;
 use App\Filters\AnswerFilter;
+use App\Services\FreshDeskAdapter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Mpclarkson\Laravel\Freshdesk\FreshdeskFacade as Freshdesk;
 
-class AnswerRepository implements AnswerContact
+class AnswerRepository implements AnswerContract
 {
     /**
      * @var AnswerFilter
@@ -26,14 +25,28 @@ class AnswerRepository implements AnswerContact
     private $model;
 
     /**
+     * @var FreshDeskAdapter
+     */
+    private $freshDesk;
+
+    /**
+     * @var Label
+     */
+    private $label;
+
+    /**
      * AnswerRepository constructor.
      * @param AnswerFilter $filter
      * @param Answer $answer
+     * @param FreshDeskAdapter $freshDeskAdapter
+     * @param Label $label
      */
-    public function __construct(AnswerFilter $filter, Answer $answer)
+    public function __construct(AnswerFilter $filter, Answer $answer, FreshDeskAdapter $freshDeskAdapter, Label $label)
     {
         $this->filter = $filter;
         $this->model = $answer;
+        $this->freshDesk = $freshDeskAdapter;
+        $this->label = $label;
     }
 
     /**
@@ -87,11 +100,11 @@ class AnswerRepository implements AnswerContact
      *
      * @param Request $request
      * @param Survey $survey
-     * @param AnswerTracking $answerTracking
+     * @param AnswerTrackingContract $trackingContract
      * @param string $cookieName
      * @return mixed|void
      */
-    public function createAnswer(Request $request, Survey $survey, AnswerTracking $answerTracking, string $cookieName)
+    public function createAnswer(Request $request, Survey $survey, AnswerTrackingContract $trackingContract, string $cookieName)
     {
         $rating = $request->input('rating');
         $lang = $request->input('lang');
@@ -101,12 +114,10 @@ class AnswerRepository implements AnswerContact
 
         $survey->answer()->create($request->input());
 
-        $answerTracking->create(
-            [
-                'cookie_name' => $cookieName,
-                'cookie_value' => $request->cookie($cookieName),
-            ]
-        );
+        $trackingContract->create([
+            'cookie_name' => $cookieName,
+            'cookie_value' => $request->cookie($cookieName),
+        ]);
 
         if ($rating >= 7) {
             $survey->increment('promoters', 1);
@@ -115,19 +126,21 @@ class AnswerRepository implements AnswerContact
         } else {
             $survey->increment('detractors', 1);
 
-            $ticketApi = Freshdesk::tickets();
-
-            $result = $ticketApi->create([
-                'email' => 'test@mail.com',
-                'subject' => 'Not satisfied',
-                'status' => 2,
-                'priority' => 3,
-                'description' => 'test',
-            ]);
-
+            //$this->notifyFreshDesk($request);
         }
 
         $survey->increment('count', 1);
+    }
+
+    /**
+     * Notify Freshdesk
+     *
+     * @param Request $request
+     */
+    private function notifyFreshDesk(Request $request)
+    {
+        $label = $this->label->find($request->input('label_id'));
+        $this->freshDesk->createTicket($request->input('content'), $label->title);
     }
 
     /**
